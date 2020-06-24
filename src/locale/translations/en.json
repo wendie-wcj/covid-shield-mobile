@@ -17,7 +17,9 @@
       "RegionNotCovered": {
         "Title": "No reporting yet in your area",
         "Body": "People in your province or territory are not yet able to report a COVID-19 diagnosis through this app.\n\nIt’s still helpful to turn StopCOVID on. That way, when people are able to report a diagnosis, you’ll be notified if you were near them.",
-        "GuidanceUrl": "https://www.canada.ca/en/public-health/services/publications/diseases-conditions/covid-19-how-to-isolate-at-home.html"
+        "GuidanceUrl": "https://www.canada.ca/en/public-health/services/publications/diseases-conditions/covid-19-how-to-isolate-at-home.html",
+        "DiagnosedBtnText1": "Diagnosed with COVID-19?",
+        "DiagnosedBtnText2": "What to do next"
       }
     },
     "ExposureDetected": {
