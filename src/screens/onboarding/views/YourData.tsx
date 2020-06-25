@@ -21,11 +21,6 @@ export const YourData = () => {
         <BulletPointX text={i18n.translate('YourData.Body2')} />
         <BulletPointX text={i18n.translate('YourData.Body3')} />
         <BulletPointX text={i18n.translate('YourData.Body4')} />
-        <Box flexDirection="row" alignItems="center" marginBottom="l">
-          <Text variant="bodyText" color="overlayBodyText">
-            {i18n.translate('YourData.Body5')}
-          </Text>
-        </Box>
       </Box>
     </ScrollView>
   );
