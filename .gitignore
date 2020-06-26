@@ -80,6 +80,7 @@ coverage
 # Fastlane
 fastlane/report.xml
 fastlane/certs/*
+CovidShield.app.dSYM.zip
 
 # ENV files
 ios/GoogleService-Info.plist
