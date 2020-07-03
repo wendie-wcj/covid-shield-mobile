@@ -1,1 +1,1 @@
-app shell in prep for entitlement request and testing
+Health Canada - COVID-19 exposure notification for Canada
