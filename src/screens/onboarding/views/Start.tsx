@@ -1,5 +1,5 @@
-import React, {useCallback} from 'react';
-import {ScrollView, StyleSheet} from 'react-native';
+import React, {useCallback, useEffect, useRef} from 'react';
+import {ScrollView, StyleSheet, AccessibilityInfo, findNodeHandle, View, Alert} from 'react-native';
 import {Box, Text, OnboardingHeader} from 'components';
 import {useI18n} from '@shopify/react-i18n';
 import {useNavigation} from '@react-navigation/native';
@@ -10,6 +10,28 @@ import {NextButton, StepText} from '../components';
 export const Start = () => {
   const [i18n] = useI18n();
   const navigation = useNavigation();
+  const headerRef = useRef(null);
+  const HeaderText = React.forwardRef((_, ref: React.Ref<View>) => {
+    return (
+      <View accessible ref={ref}>
+        <Text variant="bodyText" color="overlayBodyText">
+          {i18n.translate('Onboarding.Start.Body1')}
+        </Text>
+      </View>
+    );
+  });
+
+  useEffect(() => {
+    const unsubscribe = navigation.addListener('focus', () => {
+      AccessibilityInfo.isScreenReaderEnabled().then(enabled => {
+        if (enabled) {
+          const tag = findNodeHandle(headerRef.current);
+          if (tag) AccessibilityInfo.setAccessibilityFocus(tag);
+        }
+      });
+    });
+    return unsubscribe;
+  }, [navigation]);
 
   const onNext = useCallback(() => navigation.navigate('OnboardingWhatItsNot'), [navigation]);
 
@@ -27,9 +49,7 @@ export const Start = () => {
                 accessibilityLabel={i18n.translate('Onboarding.Start.ImageAltText')}
               />
               <Box marginBottom="m">
-                <Text variant="bodyText" color="overlayBodyText">
-                  {i18n.translate('Onboarding.Start.Body1')}
-                </Text>
+                <HeaderText ref={headerRef} />
               </Box>
               <Box marginBottom="m">
                 <Text variant="bodyText" color="overlayBodyText">
