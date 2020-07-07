@@ -24,6 +24,8 @@ import {BackendService} from 'services/BackendService';
 import {SharedTranslations, getSystemLocale} from 'locale';
 import {ThemeProvider} from 'shared/theme';
 
+import TaskSwitcherView from './components/TaskSwitcherView';
+
 // grabs the ip address
 if (__DEV__) {
   const host = NativeModules.SourceCode.scriptURL.split('://')[1].split(':')[0];
@@ -83,6 +85,7 @@ const App = () => {
 const AppProvider = () => {
   return (
     <SafeAreaProvider>
+      <TaskSwitcherView />
       <StatusBar backgroundColor="transparent" translucent />
       <StorageServiceProvider>
         <ThemeProvider>
