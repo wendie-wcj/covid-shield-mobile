@@ -4,16 +4,19 @@ import {Text} from 'components';
 import {useExposureStatus} from 'services/ExposureNotificationService';
 import {daysBetween} from 'shared/date-fns';
 import {pluralizeKey} from 'shared/pluralization';
+import {useStorage} from 'services/StorageService';
 
 import {BaseHomeView} from '../components/BaseHomeView';
+import {Tip} from '../components/Tip';
 
 export const DiagnosedView = () => {
   const [i18n] = useI18n();
+  const {region} = useStorage();
   const [exposureStatus] = useExposureStatus();
 
   if (exposureStatus.type !== 'diagnosed') return null;
 
-  const daysDiff = daysBetween(new Date(), new Date(exposureStatus.cycleEndsAt));
+  const daysLeft = daysBetween(new Date(), new Date(exposureStatus.cycleEndsAt)) - 1;
 
   return (
     <BaseHomeView iconName="hand-wave">
@@ -22,7 +25,7 @@ export const DiagnosedView = () => {
         {/* No exposure detected */}
       </Text>
       <Text variant="bodyText" color="bodyText" marginBottom="l">
-        {i18n.translate(pluralizeKey('Home.DiagnosedView.Body1', daysDiff), {number: daysDiff})}
+        {i18n.translate(pluralizeKey('Home.DiagnosedView.Body1', daysLeft), {number: daysLeft})}
       </Text>
       <Text variant="bodyText" color="bodyText" marginBottom="l">
         {i18n.translate('Home.DiagnosedView.Body2')}
@@ -30,6 +33,7 @@ export const DiagnosedView = () => {
       <Text variant="bodyText" color="bodyText" marginBottom="l">
         {i18n.translate('Home.DiagnosedView.Body3')}
       </Text>
+      {region === 'ON' ? <Tip /> : null}
     </BaseHomeView>
   );
 };
